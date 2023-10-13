@@ -1,0 +1,15 @@
+.BoxInfo {
+  border: 1px solid black;
+  padding: 25px;
+  border-radius: 24px;
+  width: 50%;
+  margin: 0 auto;
+
+}
+.info{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

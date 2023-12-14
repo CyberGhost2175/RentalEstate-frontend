@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchAuthMe, selectIsAuth,logout} from "./redux/slices/auth";
 import React from 'react';
 import {UserDetails} from "./pages/UserDetails";
+import ForgotPassword from "./pages/ForgotPass";
 function App() {
     const dispatch=useDispatch();
     const isAuth=useSelector(selectIsAuth);
@@ -23,6 +24,8 @@ function App() {
             <Container maxWidth="lg">
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
+                    <Route path="/ForgotPassword" element={<ForgotPassword/>}></Route>
+
                     <Route path="/posts/:id" element={<FullPost/>}/>
                     <Route path="/profile" element={<UserDetails/>}/>
                     <Route path="/posts/:id/edit" element={<AddPost/>}/>

@@ -107,7 +107,7 @@ export const AddPost = () => {
             spellChecker: false,
             maxHeight: '400px',
             autofocus: true,
-            placeholder: 'Введите текст...',
+            placeholder: 'Enter the description',
             status: false,
             autosave: {
                 enabled: true,
@@ -131,13 +131,13 @@ export const AddPost = () => {
     return (
         <Paper style={{padding: 30}}>
             <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-                Загрузить превью
+                Upload image
             </Button>
             <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden/>
             {imageUrl && (
                 <>
                     <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-                        Удалить
+                        Delete
                     </Button>
                     <br/>
                     <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded"/>
@@ -149,7 +149,7 @@ export const AddPost = () => {
             <TextField
                 classes={{root: styles.title}}
                 variant="standard"
-                placeholder="Заголовок статьи..."
+                placeholder="Header of post..."
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 fullWidth
@@ -159,23 +159,23 @@ export const AddPost = () => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={typeOfPost === 'Продажа'}
-                        onChange={() => setTypeOfPost(typeOfPost === 'Продажа' ? '' : 'Продажа')}
+                        checked={typeOfPost === 'Sale'}
+                        onChange={() => setTypeOfPost(typeOfPost === 'Sale' ? '' : 'Sale')}
                         color="primary"
                     />
                 }
-                label="Продажа"
+                label="Sale"
             />
 
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={typeOfPost === 'Сдача'}
-                        onChange={() => setTypeOfPost(typeOfPost === 'Сдача' ? '' : 'Сдача')}
+                        checked={typeOfPost === 'Rent'}
+                        onChange={() => setTypeOfPost(typeOfPost === 'Rent' ? '' : 'Rent')}
                         color="primary"
                     />
                 }
-                label="Сдача"
+                label="Rent"
             />
             <br/>
             <br/>
@@ -186,11 +186,11 @@ export const AddPost = () => {
                 fullWidth
             >
                 <MenuItem value="" disabled>
-                    Тип недвижимости
+                    Type of property
                 </MenuItem>
-                <MenuItem value="Квартира">Квартира</MenuItem>
-                <MenuItem value="Пентхаус">Пентхаус</MenuItem>
-                <MenuItem value="Дом">Дом</MenuItem>
+                <MenuItem value="Flat">Flat</MenuItem>
+                <MenuItem value="Penthouse">Penthouse</MenuItem>
+                <MenuItem value="House">House</MenuItem>
             </Select>
 
             <Select
@@ -200,7 +200,7 @@ export const AddPost = () => {
                 fullWidth
             >
                 <MenuItem value="" disabled>
-                    Количество комнат
+                    Count of rooms
                 </MenuItem>
                 <MenuItem value="1">1</MenuItem>
                 <MenuItem value="2">2</MenuItem>
@@ -211,7 +211,7 @@ export const AddPost = () => {
             <TextField
 
                 variant="standard"
-                placeholder="Общая площадь"
+                placeholder="Total area"
                 value={totalArea}
                 onChange={(e) => handleNumericInputChange(e.target.value, setTotalArea)}
                 fullWidth
@@ -219,14 +219,14 @@ export const AddPost = () => {
 
             <TextField
                 variant="standard"
-                placeholder="Год постройки"
+                placeholder="year of  construction"
                 value={yearOfConstruction}
                 onChange={(e) => handleNumericInputChange(e.target.value, setYearOfConstruction)}
                 fullWidth
             />
             <TextField
                 variant="standard"
-                placeholder="Цена"
+                placeholder="Price"
                 value={price}
                 onChange={(e) => handleNumericInputChange(e.target.value, setPrice)}
                 fullWidth
@@ -235,10 +235,10 @@ export const AddPost = () => {
             <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options}/>
             <div className={styles.buttons}>
                 <Button onClick={onSubmit} size="large" variant="contained">
-                    {isEditing ? 'Сохранить' : 'Подать обьявление'}
+                    {isEditing ? 'Save' : 'Create a post'}
                 </Button>
                 <a href="/">
-                    <Button size="large">Отмена</Button>
+                    <Button size="large">Cancel</Button>
                 </a>
             </div>
         </Paper>

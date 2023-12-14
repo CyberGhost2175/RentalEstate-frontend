@@ -49,7 +49,7 @@ export const FullPost = () => {
           likesCount={data.likesCount}
         isFullPost>
 
-          <h3>Описание </h3>
+          <h3>Description </h3>
           <ReactMarkdown children={data.text}  />
       </Post>
 

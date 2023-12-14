@@ -124,18 +124,18 @@ export const Post = ({
                     {isFullPost ?
                         <div >
                             <br/>
-                            <span className={styles.parameters}> Цена : <b>{price} тг</b></span>
+                            <span className={styles.parameters}> Price : <b>{price} $</b></span>
                             <br/>
                             <br/>
-                            <span className={styles.parameters}> Общая площадь : {totalArea} м²</span>
+                            <span className={styles.parameters}> Total area : {totalArea} м²</span>
                             <br/>
                             <br/>
-                            <span className={styles.parameters}>год постройки : {yearOfConstruction} г </span>
+                            <span className={styles.parameters}>year of construction : {yearOfConstruction} y </span>
                             <br/>
                         </div>
                         :
                         <div>
-                            <span><b>{price} тг</b></span>
+                            <span><b>{price} $</b></span>
                             <br/>
                             <span className={styles.totalArea}>{totalArea} м²</span>
                         </div>
@@ -162,16 +162,16 @@ export const Post = ({
                 </div>
             </div>
             <Dialog open={isDeleteDialogOpen} onClose={handleDeleteCancel}>
-                <DialogTitle>Удаление поста</DialogTitle>
+                <DialogTitle>Deleting post</DialogTitle>
                 <DialogContent>
-                    <p>Вы действительно хотите удалить объявление?</p>
+                    <p>Are you sure that you want to delete?</p>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleDeleteCancel} color="primary">
-                        Отмена
+                        Cancel
                     </Button>
                     <Button onClick={handleDeleteConfirm} color="primary">
-                        Удалить
+                        Delete
                     </Button>
                 </DialogActions>
             </Dialog>

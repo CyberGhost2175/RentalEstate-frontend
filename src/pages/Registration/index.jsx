@@ -25,7 +25,8 @@ export const Registration = () => {
         defaultValues: {
             fullName: '',
             email: '',
-            password: 'ReactDev222',
+            imageUrl: '',
+            password: '',
             phoneNumber:'+7',
         },
         mode: 'onChange'
@@ -107,7 +108,7 @@ export const Registration = () => {
     return (
         <Paper classes={{root: styles.root}}>
             <Typography classes={{root: styles.title}} variant="h5">
-                Создание аккаунта
+                Creating an account
             </Typography>
 
                 <div className={styles.avatar} onClick={handleAvatarClick}>
@@ -134,29 +135,29 @@ export const Registration = () => {
                     error={Boolean(errors.fullName?.message)}
                     helperText={errors.fullName?.message}
                     name="fullName"
-                    {...register('fullName', {required: 'Укажите имя'})}
-                    className={styles.field} label="Полное имя" fullWidth/>
+                    {...register('fullName', {required: 'enter the name'})}
+                    className={styles.field} label="Full name" fullWidth/>
                 <TextField
                     type="email"
                     error={Boolean(errors.email?.message)}
                     helperText={errors.email?.message}
-                    {...register('email', {required: 'Укажите почту'})}
+                    {...register('email', {required: 'enter the  email'})}
                     className={styles.field} label="E-Mail" fullWidth/>
 
 
 
                 <TextField
                     {...register('phoneNumber', {
-                        required: 'Укажите номер телефона',
+                        required: 'enter the phone number',
                         pattern: {
                             value: /^\+7\d{10}$/,
 
-                            message: 'Некорректный формат номера телефона',
+                            message: 'Invalid format of phone number',
                         },
                     })}
                     inputMode="numeric"
                     className={styles.field}
-                    label="Номер телефона"
+                    label="phone number"
                     error={Boolean(errors.phoneNumber?.message)}
                     helperText={errors.phoneNumber?.message}
                     fullWidth
@@ -169,18 +170,19 @@ export const Registration = () => {
                     type="password"
                     error={Boolean(errors.password?.message)}
                     helperText={errors.password?.message}
-                    {...register('password', {required: 'Укажите пароль'})}
+                    {...register('password', {required: 'enter the  password'})}
 
-                    className={styles.field} label="Пароль" fullWidth/>
+                    className={styles.field} label="password" fullWidth/>
 
                 <Button disabled={!isValid}
                         type="submit" size="large" variant="contained" fullWidth>
-                    Зарегестрироваться
+                    Sign up
                 </Button>
             </form>
             <Snackbar open={isDuplicateUser} autoHideDuration={6000} onClose={handleSnackbarClose}>
                 <Alert onClose={handleSnackbarClose} severity="warning">
-                    Пользователь с таким email или номером телефона уже зарегистрирован!
+                    user with that email or phone number already exsist !
+
                 </Alert>
             </Snackbar>
         </Paper>

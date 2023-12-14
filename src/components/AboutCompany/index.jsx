@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
-import axios from "../../axios";
-import Typography from "@mui/material/Typography";
-import {Box, FormControl, Input, InputAdornment, InputLabel, Button, Snackbar} from "@mui/material";
+
 import styles from './about.module.scss'
 export const AboutCo=()=>{
 
@@ -16,14 +13,14 @@ export const AboutCo=()=>{
                 <br/>
                 <p>
 
-                    Rental Estate™ открывает новые возможности и
-                    упрощает процесс аренды жилья для отдыха. Владельцы
-                    недвижимости доверяют нашей проверенной способности
-                    обеспечить всесторонний уход за недвижимостью и непревзойденный
-                    доход. Гости бронируют Rental Estate с уверенностью, полагаясь
-                    на профессионально
-                    обученный персонал, который поможет им найти именно то, что они ищут, и
-                    точно знают, что они получат.
+                    Rental Estate
+                    Rental Estate ™ opens up new opportunities and simplifies
+                    the process of renting a holiday home. Property owners trust
+                    our proven ability to provide comprehensive property care and
+                    an unsurpassed income. Guests book a Rental Estate with confidence,
+                    relying on professionally
+                    trained staff who will help them find exactly what they are looking
+                    for and know exactly what they will get.
 
                 </p>
             </section>

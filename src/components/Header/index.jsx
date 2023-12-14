@@ -6,7 +6,10 @@ import Container from '@mui/material/Container';
 import {useSelector, useDispatch} from "react-redux";
 import {logout, selectIsAuth} from "../../redux/slices/auth";
 import {Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 export const Header = () => {
     const isAuth = useSelector(selectIsAuth);
     const dispatch = useDispatch();
@@ -34,34 +37,40 @@ export const Header = () => {
                     <Link className={styles.logo} to="/">
                         <div>RENTAL ESTATE</div>
                     </Link>
-                    <div className={styles.buttons}>
+                    <div>
                         {isAuth ? (
                             <>
                                 <div className={styles.nav}>
 
 
                                 <Link to="/add-post"  className={styles.buttons}>
-                                    <div >Написать статью</div>
+                                    <div> <FontAwesomeIcon icon={faCirclePlus}  className={styles.icons}/>Create post</div>
                                 </Link>
+
                                 <Link to="/profile"  className={styles.buttons} >
-                                    <div >Профиль</div>
+
+                                    <div><FontAwesomeIcon icon={faUser} className={styles.icons} />Profile</div>
                                 </Link>
-                                <Button onClick={handleClickOpen} color="error">
-                                    Выйти
-                                </Button>
+                                    <div className={styles.btnLogout}>
+                                        <Button onClick={handleClickOpen} color="error" >
+                                            <FontAwesomeIcon className={styles.icons} icon={faRightFromBracket} /> Log out
+                                        </Button>
+                                    </div>
+
+
                                 </div>
 
 
 
                                 <Dialog open={open} onClose={handleClose}>
-                                    <DialogTitle>Выход из аккаунта</DialogTitle>
-                                    <DialogContent>Вы действительно хотите выйти из аккаунта?</DialogContent>
+                                    <DialogTitle>Exit from an account</DialogTitle>
+                                    <DialogContent>Do you really want to log out of your account?</DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClose} color="primary">
-                                            Отмена
+                                            Cancel
                                         </Button>
                                         <Button onClick={onClickLogout} color="error">
-                                            Выйти
+                                            Log out
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -70,10 +79,10 @@ export const Header = () => {
                             <>
                             <div className={styles.nav}>
                                 <Link to="/login" className={styles.buttons}>
-                                    <div>Войти</div>
+                                    <div>Sign in</div>
                                 </Link>
                                 <Link to="/register" className={styles.buttons}>
-                                    <div >Создать аккаунт</div>
+                                    <div >Sign up</div>
                                 </Link>
                                 </div>
                             </>

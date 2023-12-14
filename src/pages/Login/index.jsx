@@ -22,8 +22,8 @@ export const Login = () => {
         formState: {errors, isValid}
     } = useForm({
         defaultValues: {
-            email: 'asanali.itstep@mail.ru',
-            password: 'ReactDev222',
+            email: ' ',
+            password: '',
         },
         mode: 'onChange'
 
@@ -50,7 +50,7 @@ export const Login = () => {
     return (
         <Paper classes={{root: styles.root}}>
             <Typography classes={{root: styles.title}} variant="h5">
-                Вход в аккаунт
+                Sign in to account
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
@@ -59,28 +59,27 @@ export const Login = () => {
                     type="email"
                     error={Boolean(errors.email?.message)}
                     helperText={errors.email?.message}
-                    {...register('email', {required: 'Укажите почту'})}
+                    {...register('email', {required: 'enter the email'})}
 
                     fullWidth
                 />
-                <TextField className={styles.field} label="Пароль"
+                <TextField className={styles.field} label="password"
                            error={Boolean(errors.password?.message)}
                            helperText={errors.password?.message}
                            fullWidth
                            type="password"
-                           {...register('password', {required: 'Укажите пароль'})}
+                           {...register('password', {required: 'Enter the password'})}
 
                 />
 
-                <Link className={styles.forgetBlock} to="/ForgetPass">Забыли пароль ?</Link>
 
                 <Button type="submit" size="large" variant="contained" fullWidth>
-                    Войти
+                    Sign in
                 </Button>
             </form>
             <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
                 <MuiAlert onClose={handleSnackbarClose} severity="error" sx={{width: "100%"}}>
-                    Неверный логин или пароль
+                    Invalid login or password
                 </MuiAlert>
             </Snackbar>
         </Paper>

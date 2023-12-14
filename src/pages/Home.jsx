@@ -12,6 +12,9 @@
     import MenuItem from "@mui/material/MenuItem";
     import Select from "@mui/material/Select";
     import {AboutCo} from "../components/AboutCompany";
+    import Carousel from 'react-bootstrap/Carousel';
+    import 'bootstrap/dist/css/bootstrap.min.css';
+    import PropertyCarousel from '../components/propertyCarousel';
 
     export const Home = () => {
         const dispatch = useDispatch();
@@ -86,14 +89,14 @@
                     value={currentTab}
                     onChange={handleTabChange}
                 >
-                    <Tab label="Новые"/>
-                    <Tab label="Популярные"/>
+                    <Tab label="New"/>
+                    <Tab label="Popular"/>
                 </Tabs>
                 <Grid container spacing={4}>
                     <Grid xs={8} item>
+
                         {(isPostsLoading ? [...Array(5)] : getPostsByTab(currentTab)).map((obj, index) =>
                             isPostsLoading ? (
-
                                 <Post key={index} isLoading={true}/>
                             ) : (
                                 <Post
@@ -105,7 +108,6 @@
                                     typeOfProperty={obj.typeOfProperty}
                                     imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
                                     user={obj.user}
-
                                     createdAt={obj.createdAt}
                                     viewsCount={obj.viewsCount}
                                     likesCount={obj.likesCount}
@@ -114,10 +116,21 @@
                                 />
                             )
                         )}
+
+
                     </Grid>
                     <Grid xs={4} item>
                         <AboutCo/>
+                        <br/>
+                        <br/>
+                        <PropertyCarousel />
+
+
+
+
                     </Grid>
+
+
                 </Grid>
             </>
         );

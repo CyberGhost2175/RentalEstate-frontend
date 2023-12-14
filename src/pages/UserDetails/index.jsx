@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useParams} from "react-router-dom";
 import axios from "../../axios";
 import Typography from "@mui/material/Typography";
@@ -52,35 +52,34 @@ export const UserDetails = () => {
             console.error('Error updating profile:', error);
         }
     };
-
     const handleCloseSnackbar = () => {
         setIsSnackbarOpen(false);
     };
+
+
 
     React.useEffect(() => {
         fetchUserData();
     }, []);
 
     if (!userData) {
-        return <div>Загрузка...</div>
+        return <div>Loading...</div>
     }
 
     return (
-
         <>
-
-
             <Box className={styles.BoxInfo}>
-                <Avatar src={`http://localhost:4444${userData.imageUrl}`} alt="User Avatar"
-                        sx={{width: 120, height: 120, mx: 'auto'}}/>
+                        <Avatar src={`http://localhost:4444${userData.imageUrl}`} alt="User Avatar"
+                                sx={{width: 120, height: 120, mx: 'auto'}}/>
+
                 <Typography variant="h6" align="center">
-                    Редактировать профиль
+                    Edit profile
                 </Typography>
                 <div className={styles.info}>
 
 
                     <FormControl margin="normal">
-                        <InputLabel htmlFor="fullName">Полное имя</InputLabel>
+                        <InputLabel htmlFor="fullName">Full name</InputLabel>
                         <Input
                             id="fullName"
                             type="text"
@@ -100,7 +99,7 @@ export const UserDetails = () => {
                     </FormControl>
                     <br/>
                     <FormControl margin="normal">
-                        <InputLabel htmlFor="phoneNumber">Номер телефона</InputLabel>
+                        <InputLabel htmlFor="phoneNumber">Phone number</InputLabel>
                         <Input
                             id="phoneNumber"
                             type="text"
@@ -110,7 +109,7 @@ export const UserDetails = () => {
                     </FormControl>
                     <br/>
                     <Button variant="contained" onClick={handleUpdateProfile}>
-                        Сохранить
+                        Save
                     </Button>
                 </div>
 
@@ -124,5 +123,7 @@ export const UserDetails = () => {
 
         </>
     );
+
 }
+
 

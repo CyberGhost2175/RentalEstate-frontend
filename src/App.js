@@ -7,6 +7,11 @@ import {fetchAuthMe, selectIsAuth,logout} from "./redux/slices/auth";
 import React from 'react';
 import {UserDetails} from "./pages/UserDetails";
 import ForgotPassword from "./pages/ForgotPass";
+
+// Main application component
+// This file is part of the Rental Estate application
+// CI/CD pipeline test comment
+
 function App() {
     const dispatch=useDispatch();
     const isAuth=useSelector(selectIsAuth);

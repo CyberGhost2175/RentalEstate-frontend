@@ -25,8 +25,10 @@
         const navigate = useNavigate();
         const { typeOfPost } = useParams();
         const [ userData,setUserData] = useState(null);
-        const handleTabChange = (event, newValue) => {
 
+        console.log('Current posts state:', posts);
+
+        const handleTabChange = (event, newValue) => {
             setCurrentTab(newValue);
             if (newValue === 1) {
                 setDisplayedPosts(popularPosts);
@@ -34,26 +36,29 @@
                 setDisplayedPosts(posts.items);
             }
         };
-        const isPostsLoading = posts.status == "loading";
+        const isPostsLoading = posts.status === "loading";
 
         React.useEffect(() => {
-            dispatch(fetchPosts()).then(() => {
-                const sortedPosts = posts.items.slice().sort((a, b) => b.viewsCount - a.viewsCount);
-                setPopularPosts(sortedPosts);
-            });
+            console.log('Fetching posts...');
+            dispatch(fetchPosts())
+                .then((response) => {
+                    console.log('Posts fetched:', response);
+                    const sortedPosts = posts.items.slice().sort((a, b) => b.viewsCount - a.viewsCount);
+                    setPopularPosts(sortedPosts);
+                })
+                .catch((error) => {
+                    console.error('Error fetching posts:', error);
+                });
         }, []);
 
         useEffect(() => {
             if (typeOfPost) {
-                // Фильтруем посты на основе типа недвижимости из URL
                 const filteredPosts = posts.items.filter((post) => post.typeOfProperty === typeOfPost);
                 setDisplayedPosts(filteredPosts);
             } else {
                 setDisplayedPosts(posts.items);
             }
         }, [typeOfPost, posts.items]);
-
-
 
         React.useEffect(() => {
             const fetchUserData = async () => {
@@ -80,9 +85,6 @@
 
         return (
             <>
-
-
-
                 <Tabs
                     style={{marginBottom: 15}}
                     aria-label="basic tabs example"
@@ -94,7 +96,6 @@
                 </Tabs>
                 <Grid container spacing={4}>
                     <Grid xs={8} item>
-
                         {(isPostsLoading ? [...Array(5)] : getPostsByTab(currentTab)).map((obj, index) =>
                             isPostsLoading ? (
                                 <Post key={index} isLoading={true}/>
@@ -112,25 +113,16 @@
                                     viewsCount={obj.viewsCount}
                                     likesCount={obj.likesCount}
                                     isEditable={userData && userData._id && userData._id.toString() === obj.user._id.toString()}
-
                                 />
                             )
                         )}
-
-
                     </Grid>
                     <Grid xs={4} item>
                         <AboutCo/>
                         <br/>
                         <br/>
                         <PropertyCarousel />
-
-
-
-
                     </Grid>
-
-
                 </Grid>
             </>
         );

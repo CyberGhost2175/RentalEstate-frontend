@@ -1,0 +1,99 @@
+name: Frontend CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'RentalEstate-frontend/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'RentalEstate-frontend/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    env:
+      REACT_APP_API_URL: http://localhost:3000
+      NODE_ENV: test
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd RentalEstate-frontend
+        npm ci
+        
+    - name: Run tests
+      run: |
+        cd RentalEstate-frontend
+        npm test
+        
+    - name: Run linting
+      run: |
+        cd RentalEstate-frontend
+        npm run lint
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    env:
+      REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+      NODE_ENV: production
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd RentalEstate-frontend
+        npm ci
+        
+    - name: Build
+      run: |
+        cd RentalEstate-frontend
+        npm run build
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: RentalEstate-frontend/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: RentalEstate-frontend/build
+    
+    - name: Deploy to production
+      run: |
+        cd RentalEstate-frontend
+        # Add your deployment commands here
+        # For example, if using Netlify:
+        # npx netlify-cli deploy --prod --dir=build
+        # Or if using AWS S3:
+        # aws s3 sync build/ s3://your-bucket-name/ --delete 
